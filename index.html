@@ -2,28 +2,51 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Carbon Footprint Visualization</title>
-
+  <title>Carbon Footprint</title>
   <script src="https://d3js.org/d3.v7.min.js"></script>
-  <script src="https://unpkg.com/d3-annotation@2.5.1/dist/d3-annotation.min.js"></script>
-
-  <link rel="stylesheet" href="style.css" />
+  <script src="script.js" defer></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+      max-width: 700px;
+      line-height: 1.6;
+      text-align: center;
+    }
+    h1 {
+      margin-bottom: 20px;
+    }
+    p.description {
+      font-size: 18px;
+      margin-bottom: 30px;
+    }
+    button {
+      font-size: 18px;
+      padding: 15px 30px;
+      margin: 10px;
+      border-radius: 5px;
+      border: 2px solid #000;
+      background-color: #007BFF;
+      color: white;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
 </head>
 <body>
-  <header>
-    <h1>Carbon Footprint Visualization</h1>
-    <p>Explore carbon emissions, the energy sources, and health impacts across countries</p>
-  </header>
 
-  <div id="controls" style="text-align: center; margin: 20px;">
-    <button onclick="renderScene('overview')">Overview</button>
-    <button onclick="renderScene('energy')">Energy Sources</button>
+  <h1>Carbon Footprint</h1>
 
-  </div>
+  <p class="description">
+    This visualization explores different aspects of carbon emissions, including total emissions, sources and plants contributing to emissions, and the health effects resulting from carbon pollution.
+  </p>
 
-  <div id="viz" style="width: 90vw; height: 600px; margin: 0 auto; background: #fefefe;"></div>
+  <button id="btn-emissions">Carbon Emissions</button>
+  <button id="btn-sources">Carbon Emission by Source</button>
+  <button id="btn-health">Health Affect from Carbon Emission</button>
 
-  <!-- Link your JavaScript file -->
-  <script src="main.js"></script>
 </body>
 </html>
