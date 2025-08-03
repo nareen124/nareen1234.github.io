@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Carbon Footprint Visualization</title>
+
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script src="https://unpkg.com/d3-annotation@2.5.1/dist/d3-annotation.min.js"></script>
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>Carbon Footprint Visualization</h1>
+    <p>Explore carbon emissions, the energy sources, and health impacts across countries</p>
+  </header>
+
+  <div id="controls" style="text-align: center; margin: 20px;">
+    <button onclick="renderScene('overview')">Overview</button>
+    <button onclick="renderScene('energy')">Energy Sources</button>
+    <button onclick="renderScene('countries')">Countries</button>
+    <button onclick="renderScene('health')">Health Impact</button>
+  </div>
+
+  <div id="viz" style="width: 90vw; height: 600px; margin: 0 auto; background: #fefefe;"></div>
+
+  <!-- Link your JavaScript file -->
+  <script src="main.js"></script>
+</body>
+</html>
