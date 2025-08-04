@@ -1,11 +1,8 @@
 const width = 800, height = 400;
 const margin = { top: 40, right: 100, bottom: 50, left: 70 };
 
-// Clear chart area or create if missing
 function clearChart() {
-  let chart = d3.select("#chart");
-  if (chart.empty()) d3.select("body").append("div").attr("id", "chart");
-  else chart.html("");
+  d3.select("#chart").html("");
 }
 
 function drawLineChart(data, country) {
@@ -20,30 +17,25 @@ function drawLineChart(data, country) {
 
   const g = svg.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
 
-  // x scale: years (numeric)
   const x = d3.scaleLinear()
     .domain(d3.extent(data, d => +d.Year))
     .range([0, innerWidth]);
 
-  // y scale: emissions
   const y = d3.scaleLinear()
     .domain([0, d3.max(data, d => +d.Emissions)])
     .range([innerHeight, 0]);
 
-  // Line generator
   const line = d3.line()
     .x(d => x(+d.Year))
     .y(d => y(+d.Emissions));
 
-  // Draw axes
   g.append("g")
     .attr("transform", `translate(0,${innerHeight})`)
-    .call(d3.axisBottom(x).tickFormat(d3.format("d"))); // format year as integer
+    .call(d3.axisBottom(x).tickFormat(d3.format("d")));
 
   g.append("g")
     .call(d3.axisLeft(y));
 
-  // Draw line path
   g.append("path")
     .datum(data)
     .attr("fill", "none")
@@ -51,7 +43,6 @@ function drawLineChart(data, country) {
     .attr("stroke-width", 2)
     .attr("d", line);
 
-  // Title
   svg.append("text")
     .attr("x", width / 2)
     .attr("y", margin.top / 2)
@@ -59,7 +50,6 @@ function drawLineChart(data, country) {
     .attr("font-size", "20px")
     .text(`CO₂ Emissions Per Capita Over Time: ${country}`);
 
-  // Axis labels
   svg.append("text")
     .attr("x", width / 2)
     .attr("y", height - 10)
@@ -67,18 +57,17 @@ function drawLineChart(data, country) {
     .text("Year");
 
   svg.append("text")
-    .attr("transform", `translate(15, ${height/2}) rotate(-90)`)
+    .attr("transform", `translate(15, ${height / 2}) rotate(-90)`)
     .attr("text-anchor", "middle")
     .text("Emissions (MtCO₂ per capita)");
 }
 
-// Load CSV and draw for a single country
 d3.select("#btn-emissions").on("click", () => {
   d3.csv("data/co-emissions-per-capita.csv").then(rawData => {
     const emissionField = "Annual CO emissions (per capita)";
-
-    // Filter for one country, e.g. Afghanistan
     const country = "Afghanistan";
+
+    // Filter data for the selected country and parse numbers
     const filtered = rawData
       .filter(d => d.Entity === country)
       .map(d => ({
